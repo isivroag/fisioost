@@ -58,26 +58,30 @@ $(document).ready(function () {
 
         //window.location.href = "actprospecto.php?id=" + id;
         nombre = fila.find('td:eq(1)').text();
-        correo = fila.find('td:eq(2)').text();
-        calle = fila.find('td:eq(3)').text();
-        num = fila.find('td:eq(4)').text();
-        col = fila.find('td:eq(5)').text();
-        cp = fila.find('td:eq(6)').text();
-        cd = fila.find('td:eq(7)').text();
-        edo = fila.find('td:eq(8)').text();
-        tel = fila.find('td:eq(9)').text();
-        cel = fila.find('td:eq(10)').text();
+        genero = fila.find('td:eq(2)').text();
+        fechanac = fila.find('td:eq(3)').text();
+        curp = fila.find('td:eq(4)').text();
+        rfc = fila.find('td:eq(5)').text();
+        dir = fila.find('td:eq(6)').text();
+        tel = fila.find('td:eq(7)').text();
+        correo = fila.find('td:eq(8)').text();
+        cel = fila.find('td:eq(9)').text();
+        contacto = fila.find('td:eq(10)').text();
+        relacion = fila.find('td:eq(11)').text();
+        telcontacto = fila.find('td:eq(12)').text();
 
         $("#nombre").val(nombre);
+        $("#genero").val(genero);
+        $("#curp").val(curp);
+        $("#rfc").val(rfc);
+        $("#fechanac").val(fechanac);
+        $("#dir").val(dir);
         $("#correo").val(correo);
-        $("#calle").val(calle);
-        $("#col").val(col);
-        $("#num").val(num);
-        $("#cp").val(cp);
-        $("#cd").val(cd);
-        $("#edo").val(edo);
         $("#tel").val(tel);
         $("#cel").val(cel);
+        $("#contacto").val(contacto);
+        $("#relacion").val(relacion);
+        $("#telcontacto").val(telcontacto);
         opcion = 2; //editar
 
 
@@ -119,31 +123,23 @@ $(document).ready(function () {
 
     $("#formDatos").submit(function (e) {
         e.preventDefault();
-        var nombre = $.trim($("#nombre").val());
-        var calle = $.trim($("#calle").val());
-        var col = $.trim($("#col").val());
-        var num = $.trim($("#num").val());
-        var cp = $.trim($("#cp").val());
-        var cd = $.trim($("#cd").val());
-        var edo = $.trim($("#edo").val());
-        var tel = $.trim($("#tel").val());
-        var cel = $.trim($("#cel").val());
-        var correo = $.trim($("#correo").val());
+       
+        nombre =  $("#nombre").val();;
+        genero = $("#genero").val();
+        fechanac =  $("#fechanac").val();
+        curp = $("#curp").val();
+        rfc =   $("#rfc").val();
+        direccion =     $("#dir").val();
+        telefono = $("#tel").val();
+        correo =  $("#correo").val();
+        whatsapp = $("#cel").val();
+        contacto =  $("#contacto").val();
+        relacion =  $("#relacion").val();
+        tel_contacto =   $("#telcontacto").val();
 
-        console.log(nombre);
-        console.log(calle);
-        console.log(col);
-        console.log(num);
-        console.log(cp);
-        console.log(cd);
-        console.log(edo);
-        console.log(tel);
-        console.log(cel);
-        console.log(correo);
+      
 
-        if (nombre.length == 0 || calle.length == 0 || col.length == 0 ||
-            num.length == 0 || cp.length == 0 || cd.length == 0 || edo.length == 0 ||
-            tel.length == 0 || cel.length == 0 || correo.length == 0) {
+        if (nombre.length == 0 || cel.length == 0 || fechanac.length == 0 ) {
             Swal.fire({
                 title: 'Datos Faltantes',
                 text: "Debe ingresar todos los datos del Prospecto",
@@ -155,27 +151,33 @@ $(document).ready(function () {
                 url: "bd/crudpx.php",
                 type: "POST",
                 dataType: "json",
-                data: { nombre: nombre, correo: correo, calle: calle, num: num, col: col, cp: cp, cd: cd, edo: edo, tel: tel, cel: cel, id: id, opcion: opcion },
+                data: { nombre: nombre, genero: genero, 
+                    fechanac: fechanac, curp: curp,
+                     rfc: rfc, direccion: direccion, telefono: telefono,
+                      correo: correo, whatsapp: whatsapp, contacto: contacto,
+                      relacion: relacion,tel_contacto: tel_contacto, id: id, opcion: opcion },
                 success: function (data) {
                     console.log(data);
                     console.log(fila);
 
                     //tablaPersonas.ajax.reload(null, false);
-                    id = data[0].id_pros;
-                    nombre = data[0].nombre;
-                    correo = data[0].correo;
-                    calle = data[0].calle;
-                    num = data[0].num;
-                    col = data[0].col;
-                    cp = data[0].cp;
-                    cd = data[0].cd;
-                    edo = data[0].edo;
-                    tel = data[0].tel;
-                    cel = data[0].cel;
+                    id = data[0].id_px;
+                    nombre = data[0].nom;
+                    genero = data[0].genero;
+                    fechanac =  data[0].fecha_nac;
+                    curp = data[0].curp;
+                    rfc =   data[0].rfc;
+                    dir =     data[0].direccion;
+                    tel = data[0].telefono;
+                    correo =  data[0].correo;
+                    cel = data[0].whatsapp;
+                    contacto =data[0].contacto;
+                    relacion =  data[0].relacion;
+                    telcontacto =   data[0].tel_contacto;
                     if (opcion == 1) {
-                        tablaVis.row.add([id, nombre, correo, calle, num, col, cp, cd, edo, tel, cel]).draw();
+                        tablaVis.row.add([id, nombre,genero,fechanac,curp,rfc,dir,tel,correo,cel,contacto,relacion,tel_contacto,]).draw();
                     } else {
-                        tablaVis.row(fila).data([id, nombre, correo, calle, num, col, cp, cd, edo, tel, cel]).draw();
+                        tablaVis.row(fila).data([id, nombre,genero,fechanac,curp,rfc,dir,tel,correo,cel,contacto,relacion,tel_contacto,]).draw();
                     }
                 }
             });

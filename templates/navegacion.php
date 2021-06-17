@@ -36,10 +36,10 @@
             </p>
           </a>
         </li>
-        <li class="nav-item  has-treeview <?php echo ($pagina == 'paciente' ||  $pagina == 'umedida' ||  $pagina == 'cntareq' ||  $pagina == 'tipop') ? "menu-open" : ""; ?>">
+        <li class="nav-item  has-treeview <?php echo ($pagina == 'paciente' ||  $pagina == 'concepto' ||  $pagina == 'cntareq' ||  $pagina == 'tipop') ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link  <?php echo ($pagina == 'paciente' || $pagina == 'umedida' ||  $pagina == 'cntareq' ||  $pagina == 'tipop') ? "active" : ""; ?>">
+          <a href="#" class="nav-link  <?php echo ($pagina == 'paciente' || $pagina == 'concepto' ||  $pagina == 'cntareq' ||  $pagina == 'tipop') ? "active" : ""; ?>">
             <i class="nav-icon fas fa-cogs "></i>
             <p>
               Catalogos
@@ -57,9 +57,9 @@
             </li>
 
             <li class="nav-item">
-              <a href="cntatipop.php" class="nav-link <?php echo ($pagina == 'tipop') ? "active seleccionado" : ""; ?>  ">
+              <a href="cntaconcepto.php" class="nav-link <?php echo ($pagina == 'concepto') ? "active seleccionado" : ""; ?>  ">
                 <i class="fas fa-layer-group nav-icon"></i>
-                <p>Tipo de Materiales</p>
+                <p>Conceptos</p>
               </a>
             </li>
 
