@@ -15,11 +15,12 @@ $(document).ready(function () {
         },
         { className: "hide_column", "targets": [2] },
         { className: "hide_column", "targets": [4] },
+        { className: "text-right", "targets": [5] },
         {
             "render": function(data, type, row) {
                 return commaSeparateNumber(data);
             },
-            "targets": [3]
+            "targets": [5]
         }
        
         ],

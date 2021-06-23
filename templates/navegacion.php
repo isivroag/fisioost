@@ -63,19 +63,7 @@
               </a>
             </li>
 
-            <li class="nav-item">
-              <a href="cntaproducto.php" class="nav-link <?php echo ($pagina == 'producto') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-barcode nav-icon"></i>
-                <p>Materiales</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="cntareq.php" class="nav-link <?php echo ($pagina == 'cntareq') ? "active seleccionado" : ""; ?>  ">
-                <i class="far fa-clipboard nav-icon"></i>
-                <p>Requisiciones</p>
-              </a>
-            </li>
+          
 
 
 
@@ -87,25 +75,25 @@
 
 
 
-        <li class="nav-item has-treeview <?php echo ($pagina == 'inventariodet' || $pagina == 'inventariores' ) ? "menu-open" : ""; ?>">
+        <li class="nav-item has-treeview <?php echo ($pagina == 'inventariodet' || $pagina == 'cntadiario' ) ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link <?php echo ($pagina == 'inventariodet' || $pagina == 'inventariores') ? "active" : ""; ?>">
+          <a href="#" class="nav-link <?php echo ($pagina == 'inventariodet' || $pagina == 'cntadiario') ? "active" : ""; ?>">
             <span class="fa-stack">
-              <i class="fas fa-chart-line nav-icon"></i>
+              <i class="fas fa-laptop-medical nav-icon"></i>
 
             </span>
             <p>
-              Reportes
+              Operaciones
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
 
           <li class="nav-item">
-              <a href="inventario.php" class="nav-link <?php echo ($pagina == 'inventariores') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Inventario Resumen</p>
+              <a href="cntadiario.php" class="nav-link <?php echo ($pagina == 'cntadiario') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-notes-medical nav-icon"></i>
+                <p>Registro Diario</p>
               </a>
             </li>
 
