@@ -132,7 +132,7 @@ $message = "";
                                     </div>
                                 </div>
 
-                                
+
 
 
 
@@ -145,16 +145,32 @@ $message = "";
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group input-group-sm auto">
-                                        <label for="precio" class="col-form-label">Precio:</label>
-                                        <input type="text" class="form-control" name="precio" id="precio" autocomplete="off" placeholder="Precio Público">
+                                <div class="col-lg-6 ">
+
+                                    <label for="precio" class="col-form-label ">Precio:</label>
+
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-dollar-sign"></i>
+                                            </span>
+                                        </div>
+
+                                        <input type="text" class="form-control text-right" name="precio" id="precio" placeholder="Precio Público">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <div class="form-group input-group-sm auto">
+                                    
                                         <label for="costo" class="col-form-label">Costo:</label>
+                                       
+                                        <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-dollar-sign"></i>
+                                            </span>
+                                        </div>
+
                                         <input type="text" class="form-control" name="costo" id="costo" autocomplete="off" placeholder="Costo">
                                     </div>
                                 </div>

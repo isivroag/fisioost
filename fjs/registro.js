@@ -10,14 +10,9 @@ $(document).ready(function () {
         defaultContent:
           "<div class='text-center'><div class='btn-group'><button class='btn btn-sm btn-success btnSelConcepto'><i class='fas fa-hand-pointer'></i></button></div></div>",
       },
-      { className: 'hide_column', targets: [2] },
+      { className: 'text-right', targets: [2] },
 
-      {
-        render: function (data, type, row) {
-          return commaSeparateNumber(data)
-        },
-        targets: [2],
-      },
+     
     ],
 
     //Para cambiar el lenguaje a español

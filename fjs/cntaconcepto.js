@@ -16,12 +16,12 @@ $(document).ready(function () {
         { className: "hide_column", "targets": [2] },
         { className: "hide_column", "targets": [4] },
         { className: "text-right", "targets": [5] },
-        {
+      /*  {
             "render": function(data, type, row) {
                 return commaSeparateNumber(data);
             },
             "targets": [5]
-        }
+        }*/
        
         ],
 
@@ -50,7 +50,7 @@ $(document).ready(function () {
         while (/(\d+)(\d{3})/.test(val.toString())) {
             val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
         }
-        val = '$ ' + val
+        
         return val;
     }
 
