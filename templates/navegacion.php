@@ -63,7 +63,7 @@
               </a>
             </li>
 
-          
+
 
 
 
@@ -75,10 +75,10 @@
 
 
 
-        <li class="nav-item has-treeview <?php echo ($pagina == 'inventariodet' || $pagina == 'cntadiario' ) ? "menu-open" : ""; ?>">
+        <li class="nav-item has-treeview <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario') ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link <?php echo ($pagina == 'inventariodet' || $pagina == 'cntadiario') ? "active" : ""; ?>">
+          <a href="#" class="nav-link <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario') ? "active" : ""; ?>">
             <span class="fa-stack">
               <i class="fas fa-laptop-medical nav-icon"></i>
 
@@ -90,7 +90,7 @@
           </a>
           <ul class="nav nav-treeview">
 
-          <li class="nav-item">
+            <li class="nav-item">
               <a href="cntadiario.php" class="nav-link <?php echo ($pagina == 'cntadiario') ? "active seleccionado" : ""; ?>  ">
                 <i class="fas fa-notes-medical nav-icon"></i>
                 <p>Registro Diario</p>
@@ -98,12 +98,17 @@
             </li>
 
             <li class="nav-item">
-              <a href="inventariodet.php<?php echo '?mes=' . date("m") . '&ejercicio=' . date("Y") ?>" class="nav-link <?php echo ($pagina == 'inventariodet') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-file-invoice nav-icon"></i>
-                <p>Inventario Detallado</p>
+              <a href="cntavisitas.php" class=" nav-link <?php echo ($pagina == 'cntavisitas') ? "active seleccionado" : ""; ?> ">
+                <i class=" fas fa-file-invoice nav-icon"></i>
+                <p>Reporte de Visitas</p>
               </a>
             </li>
-
+            <li class="nav-item">
+              <a href="cntaingresos.php" class=" nav-link <?php echo ($pagina == 'inventariodet') ? "active seleccionado" : ""; ?> ">
+                <i class=" fas fa-file-invoice nav-icon"></i>
+                <p>Reporte de Ingresos</p>
+              </a>
+            </li>
 
           </ul>
         </li>

@@ -12,7 +12,7 @@ $(document).ready(function () {
       },
       { className: 'text-right', targets: [2] },
 
-     
+
     ],
 
     //Para cambiar el lenguaje a español
@@ -78,12 +78,87 @@ $(document).ready(function () {
   var fila //capturar la fila para editar o borrar el registro
 
   //botón EDITAR
-  $(document).on('click', '.btnGuardar', function () {
-    fila = $(this).closest('tr')
-    folio = parseInt(fila.find('td:eq(0)').text())
+  $(document).on('click', '#btnGuardar', function () {
+    idpx = $("#idpx").val();;
+    fecha = $("#fecha").val();
+    idconcepto = $("#idconcepto").val();
+    concepto = $("#concepto").val();
+    obs = $("#obs").val();
+    subtotal = $("#subtotal").val();
+    descuento = $("#descuento").val();
+    total = $("#total").val();
+    precio = $("#precio").val();
+    registro = $("#registro").val();
+    usuario = $("#nameuser").val();
+    console.log(registro);
 
-    window.location.href = 'registro.php?folio=' + folio
-  })
+    if (idpx.length == 0 || fecha.length == 0 || concepto.length == 0 ||  total.length == 0) {
+      Swal.fire({
+        title: 'Datos Faltantes',
+        text: "Debe ingresar todos los datos del Prospecto",
+        icon: 'warning',
+      })
+      return false;
+    } else {
+
+      if (registro == 0) {
+        opcion = 1;
+        $.ajax({
+          url: "bd/crudregistro.php",
+          type: "POST",
+          dataType: "json",
+          data: {
+            idpx: idpx, fecha: fecha,
+            idconcepto: idconcepto, concepto: concepto,
+            obs: obs, subtotal: subtotal, descuento: descuento,
+            total: total, usuario: usuario, precio: precio, registro: registro, opcion: opcion
+          },
+          success: function (data) {
+            if (data == 1) {
+              window.location.href = 'cntadiario.php'
+            }
+            else {
+              Swal.fire({
+                title: 'Operacion No Exitosa',
+                icon: 'warning',
+              })
+            }
+          }
+        });
+      } else {
+
+        opcion = 2;
+        $.ajax({
+          url: "bd/crudregistro.php",
+          type: "POST",
+          dataType: "json",
+          data: {
+            idpx: idpx, fecha: fecha,
+            idconcepto: idconcepto, concepto: concepto,
+            obs: obs, subtotal: subtotal, descuento: descuento,
+            total: total, usuario: usuario, precio: precio, registro: registro, opcion: opcion
+          },
+          success: function (data) {
+            if (data == 1) {
+              window.location.href = 'cntadiario.php'
+            }
+            else {
+              Swal.fire({
+                title: 'Operacion No Exitosa',
+                icon: 'warning',
+              })
+            }
+          }
+        });
+
+      }
+
+
+    }
+  });
+
+
+
 
   $(document).on('click', '#bconcepto', function () {
     $('#modalConcepto').modal('show')
@@ -116,6 +191,8 @@ $(document).ready(function () {
     $('#paciente').val(px)
     $('#modalPx').modal('hide')
   })
+
+
 
   $('#descuento').on('change keyup paste click', function () {
     descuento = $('#descuento').val()

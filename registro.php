@@ -16,7 +16,7 @@ $usuario = $_SESSION['s_nombre'];
 
 if (isset($_GET['folio'])) {
 } else {
-    $registro = "";
+    $registro = 0;
     $idpx = "";
     $paciente = "";
     $fecha = date('Y-m-d');
@@ -147,12 +147,7 @@ $datadet = $resultadodet->fetchAll(PDO::FETCH_ASSOC);
                         <div class="card card-widget" style="margin-bottom:0px;">
 
                             <div class="card-header bg-gradient-green " style="margin:0px;padding:8px">
-                                <div class="card-tools" style="margin:0px;padding:0px;">
-
-                                    <button id="btnGuardarHead" name="btnGuardarHead" type="button" class="btn bg-success btn-sm">
-                                        <i class="far fa-save"></i>
-                                    </button>
-                                </div>
+                               
 
                                 <h1 class="card-title "> Datos del Registro</h1>
                             </div>
@@ -164,7 +159,7 @@ $datadet = $resultadodet->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="col-lg-4">
                                         <div class="input-group input-group-sm">
 
-                                            <input type="hidden" class="form-control" name="registro" id="registro" value="<?php echo $requisicion; ?>">
+                                            <input type="hidden" class="form-control" name="registro" id="registro" value="<?php echo $registro; ?>">
                                             <input type="hidden" class="form-control" name="tokenid" id="tokenid" value="<?php echo $tokenid; ?>">
 
                                             <input type="hidden" class="form-control" name="idpx" id="idpx">
