@@ -1,7 +1,7 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> B 2.3
+            <b>Version</b> 1.1
         </div>
         <strong>Copyright &copy; 2021 <a href="http://tecniem.com">Tecniem</a>.</strong> All rights
         reserved.
