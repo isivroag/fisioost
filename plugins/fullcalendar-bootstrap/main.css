@@ -12,7 +12,7 @@
 
 .fc-bootstrap .fc-today.alert {
     border-radius: 0;
-    background: #ff9913;
+    background:#40e0d0 linear-gradient(180deg, #bdbdbb, #bdbdbb) repeat-x;
 }
 
 .fc-bootstrap a.fc-event:not([href]):not([tabindex]) {

@@ -36,11 +36,11 @@
             </p>
           </a>
         </li>
-        <li class="nav-item  has-treeview <?php echo ($pagina == 'paciente' ||  $pagina == 'concepto' ||  $pagina == 'cntareq' ||  $pagina == 'tipop') ? "menu-open" : ""; ?>">
+        <li class="nav-item  has-treeview <?php echo ($pagina == 'paciente' ||  $pagina == 'concepto' ||  $pagina == 'prospectos' ||  $pagina == 'personal') ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link  <?php echo ($pagina == 'paciente' || $pagina == 'concepto' ||  $pagina == 'cntareq' ||  $pagina == 'tipop') ? "active" : ""; ?>">
-            <i class="nav-icon fas fa-cogs "></i>
+          <a href="#" class="nav-link  <?php echo ($pagina == 'paciente' || $pagina == 'concepto' ||  $pagina == 'prospectos' ||  $pagina == 'personal') ? "active" : ""; ?>">
+            <i class="nav-icon fas fa-bars "></i>
             <p>
               Catalogos
               <i class="right fas fa-angle-left"></i>
@@ -50,8 +50,21 @@
 
           <ul class="nav nav-treeview">
             <li class="nav-item">
+              <a href="cntapersonal.php" class="nav-link <?php echo ($pagina == 'personal') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-id-card nav-icon"></i>
+                <p>Personal</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="cntacontacto.php" class="nav-link <?php echo ($pagina == 'prospectos') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-id-card nav-icon"></i>
+                <p>Contacto</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="cntapaciente.php" class="nav-link <?php echo ($pagina == 'paciente') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-users nav-icon"></i>
+                <i class="fas fa-hospital-user nav-icon"></i>
                 <p>Pacientes</p>
               </a>
             </li>
@@ -75,10 +88,10 @@
 
 
 
-        <li class="nav-item has-treeview <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario') ? "menu-open" : ""; ?>">
+        <li class="nav-item has-treeview <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos') ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario') ? "active" : ""; ?>">
+          <a href="#" class="nav-link <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos') ? "active" : ""; ?>">
             <span class="fa-stack">
               <i class="fas fa-laptop-medical nav-icon"></i>
 
@@ -89,6 +102,20 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+              <a href="calendario.php" class="nav-link <?php echo ($pagina == 'calendario') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-calendar-alt nav-icon"></i>
+                <p>Agenda</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="recepcion.php" class="nav-link <?php echo ($pagina == 'recepcion') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-calendar-alt nav-icon"></i>
+                <p>Recepción</p>
+              </a>
+            </li>
 
             <li class="nav-item">
               <a href="cntadiario.php" class="nav-link <?php echo ($pagina == 'cntadiario') ? "active seleccionado" : ""; ?>  ">
@@ -104,7 +131,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="cntaingresos.php" class=" nav-link <?php echo ($pagina == 'inventariodet') ? "active seleccionado" : ""; ?> ">
+              <a href="cntaingresos.php" class=" nav-link <?php echo ($pagina == 'ingresos') ? "active seleccionado" : ""; ?> ">
                 <i class=" fas fa-file-invoice nav-icon"></i>
                 <p>Reporte de Ingresos</p>
               </a>
