@@ -13,6 +13,7 @@ $concepto = (isset($_POST['concepto'])) ? $_POST['concepto'] : '';
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 $id = (isset($_POST['id'])) ? $_POST['id'] : '';
 $tipop = (isset($_POST['tipop'])) ? $_POST['tipop'] : '';
+$responsable = (isset($_POST['responsable'])) ? $_POST['responsable'] : '';
 
 $concepto = ucfirst(strtolower($concepto));
 $obs = ucfirst(strtolower($obs));
@@ -21,9 +22,9 @@ $obs = ucfirst(strtolower($obs));
 switch ($opcion) {
         case 1: //alta
                 if ($tipop==0){
-                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p) VALUES('$id_pros','0', '$fecha', '$concepto','$obs','$tipop') ";
+                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p,id_per) VALUES('$id_pros','0', '$fecha', '$concepto','$obs','$tipop','$responsable') ";
                 }else{
-                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p) VALUES('0','$id_pros', '$fecha', '$concepto','$obs','$tipop') ";
+                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p,id_per) VALUES('0','$id_pros', '$fecha', '$concepto','$obs','$tipop','$responsable') ";
                 }
               
                 $resultado = $conexion->prepare($consulta);

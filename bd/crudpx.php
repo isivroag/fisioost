@@ -20,6 +20,10 @@ $tel_contacto = (isset($_POST['tel_contacto'])) ? $_POST['tel_contacto'] : '';
 $id = (isset($_POST['id'])) ? $_POST['id'] : '';
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 
+
+$id_pros = (isset($_POST['id_pros'])) ? $_POST['id_pros'] : '';
+$id_cita = (isset($_POST['id_cita'])) ? $_POST['id_cita'] : '';
+
 switch($opcion){
     case 1: //alta
         $consulta = "INSERT INTO paciente (nom,genero,fecha_nac,curp,rfc,direccion,telefono,correo,whatsapp,contacto,relacion,tel_contacto) VALUES('$nom','$genero','$fecha_nac','$curp','$rfc','$direccion','$telefono','$correo','$whatsapp','$contacto','$relacion','$tel_contacto') ";
@@ -46,7 +50,32 @@ switch($opcion){
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
         $data=1;                          
-        break;        
+        break;   
+    case 4:
+        $consulta = "INSERT INTO paciente (nom,genero,fecha_nac,curp,rfc,direccion,telefono,correo,whatsapp,contacto,relacion,tel_contacto) VALUES('$nom','$genero','$fecha_nac','$curp','$rfc','$direccion','$telefono','$correo','$whatsapp','$contacto','$relacion','$tel_contacto') ";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute(); 
+
+        $consulta = "SELECT id_px FROM paciente ORDER BY id_px DESC LIMIT 1";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        
+        $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+        $idpx=0;
+        foreach($data as $row){
+            $idpx= $row['id_px'];
+
+        }
+        $consulta = "UPDATE citap SET id_px='$idpx',tipo_p='1' WHERE folio_citap='$id_cita'";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+
+        $consulta = "UPDATE prospecto SET id_px='$idpx' WHERE id_pros='$id_pros'";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        $data=1;
+
+        break;
 }
 
 print json_encode($data, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS

@@ -1,5 +1,5 @@
 <?php
-$pagina="calendario";
+$pagina = "calendario";
 include_once "templates/header.php";
 include_once "templates/barra.php";
 include_once "templates/navegacion.php";
@@ -11,12 +11,12 @@ include_once 'bd/conexion.php';
 $objeto = new conn();
 $conexion = $objeto->connect();
 
-$consulta = "SELECT * FROM vcitap order by folio_citap";
+$consulta = "SELECT * FROM vcitap2 order by folio_citap";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-$consultac = "SELECT * FROM prospecto order by id_pros";
+$consultac = "SELECT * FROM prospecto where id_px=0 order by id_pros";
 $resultadoc = $conexion->prepare($consultac);
 $resultadoc->execute();
 $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
@@ -26,6 +26,12 @@ $consultacx = "SELECT * FROM paciente order by id_px";
 $resultadocx = $conexion->prepare($consultacx);
 $resultadocx->execute();
 $datacx = $resultadocx->fetchAll(PDO::FETCH_ASSOC);
+
+
+$consultai = "SELECT * FROM personal WHERE estado_per =1 ORDER BY id_per";
+$resultadoi = $conexion->prepare($consultai);
+$resultadoi->execute();
+$datai = $resultadoi->fetchAll(PDO::FETCH_ASSOC);
 
 $message = "";
 
@@ -50,6 +56,11 @@ $message = "";
 <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css">
 
 <style>
+
+.fc-bootstrap .fc-today.alert {
+    border-radius: 0 !important;
+    background: #B5F2E3  !important;
+}
   .punto {
     height: 20px !important;
     width: 20px !important;
@@ -109,7 +120,7 @@ $message = "";
 
       <div class="row">
         <div class="col-lg-12">
-          
+
           <button id="btnNuevo" type="button" class="btn bg-gradient-green btn-ms" data-toggle="modal"><i class="fas fa-plus-square text-light"></i><span class="text-light"> Nuevo</span></button>
           <button id="btnNuevox" type="button" class="btn bg-gradient-info btn-ms" data-toggle="modal"><i class="fas fa-plus-square text-light"></i><span class="text-light"> Paciente</span></button>
         </div>
@@ -123,7 +134,7 @@ $message = "";
 
             <div class="card-body p-0">
 
-            <div id="div_carga">
+              <div id="div_carga">
 
                 <img id="cargador" src="img/loader.gif" />
                 <span class=" " id="textoc"><strong>Cargando...</strong></span>
@@ -144,7 +155,7 @@ $message = "";
   </section>
 
 
-<!-- CITAS DE PROSPECTOS-->
+  <!-- CITAS DE PROSPECTOS-->
 
   <section>
     <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -158,24 +169,39 @@ $message = "";
             <div class="modal-body row">
 
 
-            <div class="col-sm-12">
-              <div class="form-group">
-              <input type="hidden" class="form-control" name="tipop" id="tipop" value="0">
-              <input type="hidden" class="form-control" name="folio" id="folio">
-                <input type="hidden" class="form-control" name="id_pros" id="id_pros">
-                <label for="nombre" class="col-form-label">Contacto:</label>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="hidden" class="form-control" name="tipop" id="tipop" value="0">
+                  <input type="hidden" class="form-control" name="folio" id="folio">
+                  <input type="hidden" class="form-control" name="id_pros" id="id_pros">
+                  <label for="nombre" class="col-form-label">Contacto:</label>
 
-                <div class="input-group">
+                  <div class="input-group ">
 
-                  <input type="text" class="form-control" name="nom_pros" id="nom_pros" autocomplete="off" placeholder="Contacto">
-                  <span class="input-group-append">
-                    <button id="bcliente" type="button" class="btn btn-primary "><i class="fas fa-search"></i></button>
-                  </span>
+                    <input type="text" class="form-control" name="nom_pros" id="nom_pros" autocomplete="off" placeholder="Contacto">
+                    <span class="input-group-append">
+                      <button id="bcliente" type="button" class="btn btn-primary "><i class="fas fa-search"></i></button>
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-     
+              <div class="col-sm-12">
+                <div class="form-group auto">
+                  <label for="responsable" class="col-form-label">Responsable:</label>
+                  <select class="form-control" name="responsable" id="responsable">
+                    <?php
+                    foreach ($datai as $dti) {
+                    ?>
+                      <option id="<?php echo $dti['id_per'] ?>" value="<?php echo $dti['id_per'] ?>"> <?php echo $dti['nombre'] ?></option>
+
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+
 
               <div class="col-sm-8">
                 <div class="form-group">
@@ -311,24 +337,39 @@ $message = "";
             <div class="modal-body row">
 
 
-            <div class="col-sm-12">
-              <div class="form-group">
-              <input type="hidden" class="form-control" name="tipopx" id="tipopx" value="1">
-              <input type="hidden" class="form-control" name="foliox" id="foliox">
-                <input type="hidden" class="form-control" name="id_prosx" id="id_prosx">
-                <label for="nombrex" class="col-form-label">Paciente:</label>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="hidden" class="form-control" name="tipopx" id="tipopx" value="1">
+                  <input type="hidden" class="form-control" name="foliox" id="foliox">
+                  <input type="hidden" class="form-control" name="id_prosx" id="id_prosx">
+                  <label for="nombrex" class="col-form-label">Paciente:</label>
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <input type="text" class="form-control" name="nom_prosx" id="nom_prosx" autocomplete="off" placeholder="Paciente">
-                  <span class="input-group-append">
-                    <button id="bclientex" type="button" class="btn btn-primary "><i class="fas fa-search"></i></button>
-                  </span>
+                    <input type="text" class="form-control" name="nom_prosx" id="nom_prosx" autocomplete="off" placeholder="Paciente">
+                    <span class="input-group-append">
+                      <button id="bclientex" type="button" class="btn btn-primary "><i class="fas fa-search"></i></button>
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-     
+              <div class="col-sm-12">
+                <div class="form-group  auto">
+                  <label for="responsablex" class="col-form-label">Responsable:</label>
+                  <select class="form-control" name="responsablex" id="responsablex">
+                    <?php
+                    foreach ($datai as $dti) {
+                    ?>
+                      <option id="<?php echo $dti['id_per'] ?>" value="<?php echo $dti['id_per'] ?>"> <?php echo $dti['nombre'] ?></option>
+
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+
 
               <div class="col-sm-8">
                 <div class="form-group">

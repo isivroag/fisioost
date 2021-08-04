@@ -250,6 +250,7 @@ $(document).ready(function() {
         var obs = $.trim($("#obs").val());
         var id = $.trim($("#folio").val());
         var tipop = $.trim($("#tipop").val());
+        var responsable = $.trim($("#responsable").val());
         console.log(tipop);
 
 
@@ -257,7 +258,7 @@ $(document).ready(function() {
             url: "bd/citasp.php",
             type: "POST",
             dataType: "json",
-            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion },
+            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion, responsable: responsable },
             success: function(data) {
                 location.reload();
 
@@ -275,6 +276,7 @@ $(document).ready(function() {
         var obs = $.trim($("#obsx").val());
         var id = $.trim($("#foliox").val());
         var tipop = $.trim($("#tipopx").val());
+        var responsable = $.trim($("#responsablex").val());
 
 
 
@@ -282,7 +284,7 @@ $(document).ready(function() {
             url: "bd/citasp.php",
             type: "POST",
             dataType: "json",
-            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion },
+            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion,responsable: responsable },
             success: function(data) {
                 location.reload();
 

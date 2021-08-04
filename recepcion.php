@@ -12,7 +12,7 @@ include_once 'bd/conexion.php';
 $objeto = new conn();
 $conexion = $objeto->connect();
 $hoy = date('Y-m-d');
-$consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,time(start) as hora FROM vcitap WHERE date(start)='$hoy' ORDER BY start";
+$consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,time(start) as hora,nombre,color,estado FROM vcitap2 WHERE date(start)='$hoy' ORDER BY start";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -23,9 +23,7 @@ $message = "";
 
 ?>
 
-<style>
 
-</style>
 
 <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -57,7 +55,7 @@ $message = "";
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
-                                <table name="tablaV" id="tablaV" class="table table-sm table-striped table-hover table-bordered table-condensed text-nowrap w-auto mx-auto" style="width:100%">
+                                <table name="tablaV" id="tablaV" class="table table-sm  table-hover table-bordered table-condensed text-nowrap w-auto mx-auto" style="width:100%">
                                     <thead class="text-center bg-gradient-green">
                                         <tr>
                                             <th>Folio</th>
@@ -66,6 +64,9 @@ $message = "";
                                             <th>Nombre</th>
                                             <th>Motivo de Consulta</th>
                                             <th>Hora</th>
+                                            <th>Responsable</th>
+                                            <th>Color</th>
+                                            <th>Estado</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -81,6 +82,9 @@ $message = "";
                                                 <td><?php echo $dat['title'] ?></td>
                                                 <td><?php echo $dat['descripcion'] ?></td>
                                                 <td><?php echo $dat['hora']?></td>
+                                                <td><?php echo $dat['nombre']?></td>
+                                                <td><?php echo $dat['color']?></td>
+                                                <td><?php echo $dat['estado']?></td>
                                                 <td></td>
                                             </tr>
                                         <?php
@@ -104,62 +108,129 @@ $message = "";
 
 
     <section>
-        <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-gradient-green">
-                        <h5 class="modal-title" id="exampleModalLabel">NUEVO PERSONAL</h5>
+    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-gradient-green">
+            <h5 class="modal-title" id="exampleModalLabel">NUEVO PACIENTE</h5>
 
-                    </div>
-                    <div class="card card-widget" style="margin: 10px;">
-                        <form id="formDatos" action="" method="POST">
-                            <div class="modal-body row">
+          </div>
+          <div class="card card-widget" style="margin: 10px;">
+            <form id="formDatos" action="" method="POST">
+              <div class="modal-body row">
 
+              <input type="hidden" class="form-control" name="id_cita" id="id_cita" autocomplete="off" >
+              <input type="hidden" class="form-control" name="id_pros" id="id_pros" autocomplete="off" >
 
-                                <div class="col-sm-12">
-                                    <div class="form-group input-group-sm">
-                                        <label for="nombre" class="col-form-label">Nombre:</label>
-                                        <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" placeholder="Nombre">
-                                    </div>
-                                </div>
-
-
-
-                                <div class="col-sm-3">
-                                    <div class="form-group input-group-sm">
-                                        <label for="tel" class="col-form-label">Tel:</label>
-                                        <input type="text" class="form-control" name="tel" id="tel" autocomplete="off" placeholder="Tel.">
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                    </div>
-
-
-                    <?php
-                    if ($message != "") {
-                    ?>
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <span class="badge "><?php echo ($message); ?></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-
-                        </div>
-
-                    <?php
-                    }
-                    ?>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
-                        <button type="submit" id="btnGuardar" name="btnGuardar" class="btn btn-success" value="btnGuardar"><i class="far fa-save"></i> Guardar</button>
-                    </div>
-                    </form>
+                <div class="col-sm-12">
+                  <div class="form-group input-group-sm">
+                    <label for="nombre" class="col-form-label">Nombre:</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" placeholder="Nombre">
+                  </div>
                 </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="genero" class="col-form-label">Genero:</label>
+                    <input type="text" class="form-control" name="genero" id="genero" autocomplete="off" placeholder="Genero">
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="curp" class="col-form-label">CURP:</label>
+                    <input type="text" class="form-control" name="curp" id="curp" autocomplete="off" placeholder="CURP">
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="rfc" class="col-form-label">RFC:</label>
+                    <input type="text" class="form-control" name="rfc" id="rfc" autocomplete="off" placeholder="RFC">
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="fechanac" class="col-form-label">Fecha de Nacimiento:</label>
+                    <input type="date" class="form-control" name="fechanac" id="fechanac" autocomplete="off" >
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group input-group-sm">
+                    <label for="dir" class="col-form-label">Dirección:</label>
+                    <textarea rows="2" type="text" class="form-control" name="dir" id="dir" autocomplete="off" placeholder="Dirección"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group input-group-sm">
+                    <label for="correo" class="col-form-label">Correo Eléctronico:</label>
+                    <input type="text" class="form-control" name="correo" id="correo" autocomplete="off" placeholder="Correo Eléctronico">
+                  </div>
+                </div>
+
+                
+
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="tel" class="col-form-label">Tel:</label>
+                    <input type="text" class="form-control" name="tel" id="tel" autocomplete="off" placeholder="Teléfono">
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="cel" class="col-form-label">Whasapp:</label>
+                    <input type="text" class="form-control" name="cel" id="cel" autocomplete="off" placeholder="Whatsapp">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group input-group-sm">
+                    <label for="contacto" class="col-form-label">Contacto de Emergencia:</label>
+                    <input type="text" class="form-control" name="contacto" id="contacto" autocomplete="off" placeholder="Contacto de Emergencia">
+                  </div>
+                </div>
+
+                
+
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="relacion" class="col-form-label">Relación:</label>
+                    <input type="text" class="form-control" name="relacion" id="relacion" autocomplete="off" placeholder="Tipo de Relación">
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group input-group-sm">
+                    <label for="telcontacto" class="col-form-label">Telefono Contacto:</label>
+                    <input type="text" class="form-control" name="telcontacto" id="telcontacto" autocomplete="off" placeholder="Teléfono de Contactos">
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
+          <?php
+          if ($message != "") {
+          ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <span class="badge "><?php echo ($message); ?></span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+
             </div>
+
+          <?php
+          }
+          ?>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
+            <button type="submit" id="btnGuardar" name="btnGuardar" class="btn btn-success" value="btnGuardar"><i class="far fa-save"></i> Guardar</button>
+          </div>
+          </form>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
     <!-- /.content -->
 </div>
 

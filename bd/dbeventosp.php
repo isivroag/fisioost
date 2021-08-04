@@ -7,7 +7,7 @@ $conexion = $objeto->connect();
 $data="";
 
 
-$consulta = "SELECT * FROM vcitap ORDER BY id";
+$consulta = "SELECT * FROM vcitap2 ORDER BY id";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data = $resultado->fetchAll(PDO::FETCH_ASSOC);

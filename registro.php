@@ -374,7 +374,7 @@ $datadet = $resultadodet->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                         <br>
                         <div class="table-hover table-responsive w-auto" style="padding:15px">
-                            <table name="tablaCon" id="tablaCon" class="table table-sm text-nowrap table-striped table-bordered table-condensed" style="width:100%">
+                            <table name="tablaCon" id="tablaCon" class="table table-sm table-striped table-bordered table-condensed " style="width:100%">
                                 <thead class="text-center bg-gradient-green">
                                     <tr>
                                         <th>Id</th>
