@@ -21,14 +21,45 @@ $obs = ucfirst(strtolower($obs));
 
 switch ($opcion) {
         case 1: //alta
-                if ($tipop==0){
-                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p,id_per) VALUES('$id_pros','0', '$fecha', '$concepto','$obs','$tipop','$responsable') ";
-                }else{
-                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p,id_per) VALUES('0','$id_pros', '$fecha', '$concepto','$obs','$tipop','$responsable') ";
-                }
-              
+                $consulta = "SELECT * FROM citap where (id_per='$responsable' and fecha='$fecha')";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
+                if ($resultado->rowCount()==0){
+                        if ($tipop==0){
+                                $consulta = "SELECT * FROM citap where (id_pros='$id_pros' and fecha='$fecha')";
+                                $resultado = $conexion->prepare($consulta);
+                                $resultado->execute();
+                                if ($resultado->rowCount()==0){
+                                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p,id_per) VALUES('$id_pros','0', '$fecha', '$concepto','$obs','$tipop','$responsable') ";
+                                }else{
+                                        $data=0;
+                                        break;
+                                }
+                        }else{
+                                $consulta = "SELECT * FROM citap where (id_px='$id_pros' and fecha='$fecha')";
+                                $resultado = $conexion->prepare($consulta);
+                                $resultado->execute();
+                                if ($resultado->rowCount()==0){
+                                        $consulta = "INSERT INTO citap (id_pros,id_px,fecha,concepto,obs,tipo_p,id_per) VALUES('0','$id_pros', '$fecha', '$concepto','$obs','$tipop','$responsable') ";
+                                }else{
+                                        $data=0;
+                                        break;
+                                }
+
+                                
+                        }
+                      
+                        $resultado = $conexion->prepare($consulta);
+                        if($resultado->execute() ){
+                                $data=1;
+                        }else{
+                                $data=0;
+                        }
+                }else{
+                        $data=0;
+                }
+
+               
                 break;
         case 2:
                 $consulta = "UPDATE citap SET id_pros='$id_pros',fecha='$fecha',concepto='$concepto',obs='$obs' WHERE folio_citap='$id' ";

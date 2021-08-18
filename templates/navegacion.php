@@ -51,7 +51,7 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="cntapersonal.php" class="nav-link <?php echo ($pagina == 'personal') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-id-card nav-icon"></i>
+                <i class="fas fa-user-md nav-icon"></i>
                 <p>Personal</p>
               </a>
             </li>
@@ -68,14 +68,14 @@
                 <p>Pacientes</p>
               </a>
             </li>
-
+            <?php if ($_SESSION['s_rol'] == '2') {?>
             <li class="nav-item">
               <a href="cntaconcepto.php" class="nav-link <?php echo ($pagina == 'concepto') ? "active seleccionado" : ""; ?>  ">
                 <i class="fas fa-layer-group nav-icon"></i>
                 <p>Conceptos</p>
               </a>
             </li>
-
+            <?php }?>
 
 
 
@@ -88,10 +88,10 @@
 
 
 
-        <li class="nav-item has-treeview <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos') ? "menu-open" : ""; ?>">
+        <li class="nav-item has-treeview <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos' || $pagina == 'diario') ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos') ? "active" : ""; ?>">
+          <a href="#" class="nav-link <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos' || $pagina == 'diario') ? "active" : ""; ?>">
             <span class="fa-stack">
               <i class="fas fa-laptop-medical nav-icon"></i>
 
@@ -112,30 +112,42 @@
 
             <li class="nav-item">
               <a href="recepcion.php" class="nav-link <?php echo ($pagina == 'recepcion') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-calendar-alt nav-icon"></i>
+                <i class="fas fa-hospital nav-icon"></i>
                 <p>Recepción</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="cntadiario.php" class="nav-link <?php echo ($pagina == 'cntadiario') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-notes-medical nav-icon"></i>
-                <p>Registro Diario</p>
+                <i class="fas fa-money-bill-wave nav-icon"></i>
+                <p>Registro de Ingresos</p>
               </a>
             </li>
-
+<!--
             <li class="nav-item">
               <a href="cntavisitas.php" class=" nav-link <?php echo ($pagina == 'cntavisitas') ? "active seleccionado" : ""; ?> ">
                 <i class=" fas fa-file-invoice nav-icon"></i>
                 <p>Reporte de Visitas</p>
               </a>
             </li>
+            -->
+            <li class="nav-item">
+              <a href="cortediario.php" class=" nav-link <?php echo ($pagina == 'diario') ? "active seleccionado" : ""; ?> ">
+                <i class=" fas fa-file-invoice-dollar nav-icon"></i>
+                <p>Reporte de Caja</p>
+              </a>
+            </li>
+
+            <?php if ($_SESSION['s_rol'] == '2') {?>
             <li class="nav-item">
               <a href="cntaingresos.php" class=" nav-link <?php echo ($pagina == 'ingresos') ? "active seleccionado" : ""; ?> ">
                 <i class=" fas fa-file-invoice nav-icon"></i>
                 <p>Reporte de Ingresos</p>
               </a>
             </li>
+           
+
+            <?php }?>
 
           </ul>
         </li>
@@ -144,8 +156,7 @@
 
 
 
-        <?php if ($_SESSION['s_rol'] == '2') {
-        ?>
+        <?php if ($_SESSION['s_rol'] == '2') {?>
           <hr class="sidebar-divider">
           <li class="nav-item">
             <a href="cntausuarios.php" class="nav-link <?php echo ($pagina == 'usuarios') ? "active" : ""; ?> ">
@@ -153,9 +164,7 @@
               <p>Usuarios</p>
             </a>
           </li>
-        <?php
-        }
-        ?>
+        <?php }?>
 
         <hr class="sidebar-divider">
         <li class="nav-item">

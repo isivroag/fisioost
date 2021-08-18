@@ -5,16 +5,16 @@ $(document).ready(function () {
     tablaVis = $("#tablaV").DataTable({
         keys: true,
         stateSave: true,
-        "paging": true,
-
-
+        "paging": false,
+/* buton editar */
+/*<button class='btn btn-sm btn-primary  btnEditar'><i class='fas fa-edit'></i></button> */
         "columnDefs": [{
             "targets": -1,
             "data": null,
-            "defaultContent": "<div class='text-center'><button class='btn btn-sm btn-primary  btnEditar'><i class='fas fa-edit'></i></button>\
+            "defaultContent": "<div class='text-center'>\
             <button class='btn btn-sm btn-success btnPagar'><i class='fas fa-dollar-sign'> </i></button>\
             <button class='btn btn-sm btn-info btnResumen'><i class='fas fa-search-dollar'></i></button>\
-            <button class='btn btn-sm btn-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div>"
+            <button class='btn btn-sm btn-danger btnCancelar'><i class='fas fa-ban'></i></button></div>"
         },
         { className: "hide_column", "targets": [2] },
         { className: "hide_column", "targets": [4] },
@@ -72,6 +72,103 @@ $(document).ready(function () {
             sProcessing: "Procesando...",
         },
     });
+
+
+    $(document).on("click", ".btnCancelar", function() {
+        fila = $(this).closest("tr");
+
+
+        folio = parseInt(fila.find("td:eq(0)").text());
+
+        saldo = fila.find("td:eq(7)").text().replace("$", "");
+       
+        saldo = saldo.replace(",", "");
+        saldo = parseFloat(saldo);
+        console.log(saldo);
+        total = fila.find("td:eq(6)").text().replace("$", "");
+        total = total.replace(",", "");
+        console.log(total);
+        total = parseFloat(total);
+
+        if (total == saldo) {
+            $("#formcan").trigger("reset");
+            /*$(".modal-header").css("background-color", "#28a745");*/
+            $(".modal-header").css("color", "white");
+            $("#modalcan").modal("show");
+            $("#foliocan").val(folio);
+        } else {
+            swal.fire({
+                title: "¡No es posible cancelar la venta!",
+                text: "El Registro tiene pagos, es necesario cancelar los pagos antes de cancelar la Venta",
+                icon: "error",
+                focusConfirm: true,
+                confirmButtonText: "Aceptar",
+            });
+        }
+
+
+    });
+
+    $(document).on("click", "#btnGuardarc", function() {
+        motivo = $("#motivo").val();
+        folio = $("#foliocan").val();
+        fecha = $("#fechac").val();
+        usuario = $("#nameuser").val();
+        $("#modalcan").modal("hide");
+       
+
+
+        if (motivo === "") {
+            swal.fire({
+                title: "Datos Incompletos",
+                text: "Verifique sus datos",
+                icon: "warning",
+                focusConfirm: true,
+                confirmButtonText: "Aceptar",
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "bd/cancelarregistro.php",
+                async: false,
+                dataType: "json",
+                data: {
+                    folio: folio,
+                    motivo: motivo,
+                    fecha: fecha,
+                    usuario: usuario,
+                },
+                success: function(res) {
+                    if (res == 1) {
+                        mensaje();
+                        window.setTimeout(function() {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        mensajeerror();
+                    }
+                },
+            });
+        }
+    });
+
+    function mensaje() {
+        swal.fire({
+            title: "Registro Cancelado",
+            icon: "success",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+        });
+    }
+
+    function mensajeerror() {
+        swal.fire({
+            title: "Error al Cancelar el Registro",
+            icon: "error",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+        });
+    }
 
     function commaSeparateNumber(val) {
         while (/(\d+)(\d{3})/.test(val.toString())) {
@@ -172,8 +269,7 @@ $(document).ready(function () {
 
                 },
             })
-            console.log(parseFloat(saldop));
-            console.log(parseFloat(montop));
+           
             if (parseFloat(saldop) < parseFloat(montop)) {
                 swal.fire({
                     title: 'Pago Excede el Saldo',
@@ -208,8 +304,10 @@ $(document).ready(function () {
 
                             mensajepago();
                             $('#modalPago').modal('hide');
-
-                            window.location.reload();
+                            window.setTimeout(function() {
+                                window.location.reload();
+                            }, 1500);
+                            
 
                         } else {
                             mensajerror()
@@ -283,12 +381,6 @@ $(document).ready(function () {
 
 
 
-    //botón BORRAR
-    $(document).on("click", ".btnBorrar", function () {
-        fila = $(this);
-        folio = parseInt(fila.find('td:eq(0)').text());
-
-    });
 
 
     $('#btnBuscar').click(function () {

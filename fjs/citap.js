@@ -258,9 +258,28 @@ $(document).ready(function() {
             url: "bd/citasp.php",
             type: "POST",
             dataType: "json",
+            async:"false",
             data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion, responsable: responsable },
             success: function(data) {
-                location.reload();
+                if (data==1){
+                    console.log(data);
+                    Swal.fire({
+                        title: "Operación Exitosa",
+                        text: "Cita Guardad",
+                        icon: "success",
+                        timer:1000,
+                    });
+                    window.setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                   
+                }else{
+                    Swal.fire({
+                        title: 'No es posible Agendar la Cita',
+                        icon: 'warning',
+                    })
+                }
+               
 
             }
         });
@@ -286,8 +305,24 @@ $(document).ready(function() {
             dataType: "json",
             data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion,responsable: responsable },
             success: function(data) {
-                location.reload();
-
+                if (data==1){
+                    console.log(data);
+                    Swal.fire({
+                        title: "Operación Exitosa",
+                        text: "Cita Guardada",
+                        icon: "success",
+                        timer:1000,
+                    });
+                    window.setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                   
+                }else{
+                    Swal.fire({
+                        title: 'No es posible Agendar la Cita',
+                        icon: 'warning',
+                    })
+                }
             }
         });
         $("#modalCRUD").modal("hide");

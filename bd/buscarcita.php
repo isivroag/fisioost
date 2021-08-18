@@ -10,7 +10,8 @@
  
  $id = (isset($_POST['id'])) ? $_POST['id'] : '';
  $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
- 
+ date_default_timezone_set('America/Mexico_City');
+ $ahora=date("Y-m-d H:i:s");
  $data=0;
  switch($opcion)
  {
@@ -27,6 +28,42 @@
         } 
 
         
+        break;
+        case 2:
+            $consulta = "SELECT * from citap where folio_citap='$id'";			
+            $resultado = $conexion->prepare($consulta);
+            if ($resultado->execute()){
+                $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                
+                $consulta = "UPDATE citap set estado=2 where folio_citap='$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+    
+            } 
+        break;
+        case 3:
+            $consulta = "SELECT * from citap where folio_citap='$id'";			
+            $resultado = $conexion->prepare($consulta);
+            if ($resultado->execute()){
+                $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                
+                $consulta = "UPDATE citap set estado=3 where folio_citap='$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+    
+            } 
+        break;
+        case 4:
+            $consulta = "SELECT * from citap where folio_citap='$id'";			
+            $resultado = $conexion->prepare($consulta);
+            if ($resultado->execute()){
+                $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                
+                $consulta = "UPDATE citap set estado=4 where folio_citap='$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+    
+            } 
         break;
     
     

@@ -259,7 +259,7 @@ $message = "";
             ?>
             <div class="modal-footer">
               <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
-              <button type="submit" id="btnGuardar" name="btnGuardar" class="btn btn-success" value="btnGuardar"><i class="far fa-save"></i> Guardar</button>
+              <button type="button" id="btnGuardar" name="btnGuardar" class="btn btn-success" value="btnGuardar"><i class="far fa-save"></i> Guardar</button>
             </div>
           </form>
         </div>
@@ -427,7 +427,7 @@ $message = "";
             ?>
             <div class="modal-footer">
               <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
-              <button type="submit" id="btnGuardarx" name="btnGuardarx" class="btn btn-success" value="btnGuardarx"><i class="far fa-save"></i> Guardar</button>
+              <button type="button" id="btnGuardarx" name="btnGuardarx" class="btn btn-success" value="btnGuardarx"><i class="far fa-save"></i> Guardar</button>
             </div>
           </form>
         </div>
