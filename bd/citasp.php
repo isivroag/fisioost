@@ -21,7 +21,7 @@ $obs = ucfirst(strtolower($obs));
 
 switch ($opcion) {
         case 1: //alta
-                $consulta = "SELECT * FROM citap where (id_per='$responsable' and fecha='$fecha')";
+                $consulta = "SELECT * FROM citap where (id_per='$responsable' and fecha='$fecha') and estado<> 3 and estado <> 4";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
                 if ($resultado->rowCount()==0){
@@ -36,7 +36,7 @@ switch ($opcion) {
                                         break;
                                 }
                         }else{
-                                $consulta = "SELECT * FROM citap where (id_px='$id_pros' and fecha='$fecha')";
+                                $consulta = "SELECT * FROM citap where (id_px='$id_pros' and fecha='$fecha') and estado<> 3 and estado <> 4";
                                 $resultado = $conexion->prepare($consulta);
                                 $resultado->execute();
                                 if ($resultado->rowCount()==0){
@@ -64,7 +64,12 @@ switch ($opcion) {
         case 2:
                 $consulta = "UPDATE citap SET id_pros='$id_pros',fecha='$fecha',concepto='$concepto',obs='$obs' WHERE folio_citap='$id' ";
                 $resultado = $conexion->prepare($consulta);
-                $resultado->execute();
+                if ($resultado->execute()){
+                        $data=1;
+                }else{
+                        $data=0;
+                }
+
                 break;
 
 

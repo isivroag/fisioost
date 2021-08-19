@@ -61,6 +61,7 @@ $message = "";
                       <th>Télefono</th>
                       <th>Whatsapp</th>
                       <th>Contacto</th>
+                      <th>Tel Contacto</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
@@ -74,6 +75,7 @@ $message = "";
                         <td><?php echo $dat['tel'] ?></td>
                         <td><?php echo $dat['cel'] ?></td>
                         <td><?php echo $dat['contacto'] ?></td>
+                        <td><?php echo $dat['tel_contacto'] ?></td>
 
                         <td></td>
                       </tr>
@@ -117,24 +119,31 @@ $message = "";
                   </div>
                 </div>
 
-                <div class="col-sm-6">
-                  <div class="form-group input-group-sm">
-                    <label for="contacto" class="col-form-label">Contacto:</label>
-                    <input type="text" class="form-control" name="contacto" id="contacto" autocomplete="off" placeholder="Contacto">
-                  </div>
-                </div>
+                
 
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                   <div class="form-group input-group-sm">
                     <label for="tel" class="col-form-label">Teléfono:</label>
                     <input type="text" class="form-control" name="tel" id="tel" autocomplete="off" placeholder="Teléfono">
                   </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                   <div class="form-group input-group-sm">
                     <label for="cel" class="col-form-label">Whatsapp:</label>
                     <input type="text" class="form-control" name="cel" id="cel" autocomplete="off" placeholder="Whatsapp">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group input-group-sm">
+                    <label for="contacto" class="col-form-label">Contacto:</label>
+                    <input type="text" class="form-control" name="contacto" id="contacto" autocomplete="off" placeholder="Contacto">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group input-group-sm">
+                    <label for="tel_contacto" class="col-form-label">Teléfono de Contacto:</label>
+                    <input type="text" class="form-control" name="tel_contacto" id="tel_contacto" autocomplete="off" placeholder="Teléfono deContacto">
                   </div>
                 </div>
 

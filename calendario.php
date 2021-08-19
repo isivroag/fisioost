@@ -11,7 +11,7 @@ include_once 'bd/conexion.php';
 $objeto = new conn();
 $conexion = $objeto->connect();
 
-$consulta = "SELECT * FROM vcitap2 order by folio_citap";
+$consulta = "SELECT * FROM vcitap2 where estado<>3 and estado<>4 order by folio_citap";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data = $resultado->fetchAll(PDO::FETCH_ASSOC);

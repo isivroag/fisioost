@@ -265,7 +265,7 @@ $(document).ready(function() {
                     console.log(data);
                     Swal.fire({
                         title: "Operación Exitosa",
-                        text: "Cita Guardad",
+                        text: "Cita Guardada",
                         icon: "success",
                         timer:1000,
                     });

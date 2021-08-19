@@ -139,7 +139,7 @@ $(document).ready(function () {
 
       
 
-        if (nombre.length == 0 || cel.length == 0 || fechanac.length == 0 ) {
+        if (nombre.length == 0 || whatsapp.length == 0 || fechanac.length == 0 ) {
             Swal.fire({
                 title: 'Datos Faltantes',
                 text: "Debe ingresar todos los datos del Prospecto",

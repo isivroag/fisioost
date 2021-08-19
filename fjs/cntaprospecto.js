@@ -55,12 +55,14 @@ $(document).ready(function() {
         tel = fila.find('td:eq(2)').text();
         cel = fila.find('td:eq(3)').text();
         contacto = fila.find('td:eq(4)').text();
+        tel_contacto = fila.find('td:eq(5)').text();
 
         $("#nombre").val(nombre);
        
         $("#tel").val(tel);
         $("#cel").val(cel);
         $("#contacto").val(contacto);
+        $("#tel_contacto").val(tel_contacto);
         opcion = 2; //editar
 
         $(".modal-header").css("background-color", "#007bff");
@@ -108,6 +110,7 @@ $(document).ready(function() {
         var tel = $.trim($("#tel").val());
         var cel = $.trim($("#cel").val());
         var contacto = $.trim($("#contacto").val());
+        var tel_contacto = $.trim($("#tel_contacto").val());
     
      
 
@@ -123,7 +126,7 @@ $(document).ready(function() {
                 url: "bd/crudpros.php",
                 type: "POST",
                 dataType: "json",
-                data: { nombre: nombre,  tel: tel, cel: cel, id: id, contacto: contacto, opcion: opcion },
+                data: { nombre: nombre,  tel: tel, cel: cel, id: id, contacto: contacto, tel_contacto: tel_contacto, opcion: opcion },
                 success: function(data) {
                 
                     id = data[0].id_pros;
@@ -131,10 +134,11 @@ $(document).ready(function() {
                     tel = data[0].tel;
                     cel = data[0].cel;
                     contacto = data[0].contacto;
+                    tel_contacto = data[0].tel_contacto;
                     if (opcion == 1) {
-                        tablaVis.row.add([id, nombre,  tel, cel,contacto,]).draw();
+                        tablaVis.row.add([id, nombre,  tel, cel,contacto,tel_contacto,]).draw();
                     } else {
-                        tablaVis.row(fila).data([id, nombre,  tel, cel,contacto,]).draw();
+                        tablaVis.row(fila).data([id, nombre,  tel, cel,contacto,tel_contacto,]).draw();
                     }
                 }
             });
