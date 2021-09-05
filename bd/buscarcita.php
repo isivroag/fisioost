@@ -25,6 +25,8 @@
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
+
+
         } 
 
         
@@ -38,6 +40,8 @@
                 $consulta = "UPDATE citap set estado=2 where folio_citap='$id'";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
+
+
     
             } 
         break;
@@ -59,13 +63,51 @@
             if ($resultado->execute()){
                 $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
                 
-                $consulta = "UPDATE citap set estado=4 where folio_citap='$id'";
+                $consulta = "UPDATE citap set estado=4,confirmar=3 where folio_citap='$id'";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
+
+                $consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,time(start) as hora,nombre,color,estado,confirmar FROM vcitap2 WHERE id='$id' ORDER BY start";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+                $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
     
             } 
         break;
+        case 6:
+            $consulta = "SELECT * from citap where folio_citap='$id'";			
+            $resultado = $conexion->prepare($consulta);
+            if ($resultado->execute()){
+                $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                
+                $consulta = "UPDATE citap set confirmar=1,estado=0 where folio_citap='$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                $consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,time(start) as hora,nombre,color,estado,confirmar FROM vcitap2 WHERE id='$id' ORDER BY start";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+                $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
     
+            } 
+        break;
+        case 7:
+            $consulta = "SELECT * from citap where folio_citap='$id'";			
+            $resultado = $conexion->prepare($consulta);
+            if ($resultado->execute()){
+                $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                
+                $consulta = "UPDATE citap set confirmar=2,estado=0 where folio_citap='$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                $consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,time(start) as hora,nombre,color,estado,confirmar FROM vcitap2 WHERE id='$id' ORDER BY start";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+                $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    
+            } 
+        break;
     
  }
 

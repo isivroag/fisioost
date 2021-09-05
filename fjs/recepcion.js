@@ -17,6 +17,7 @@ $(document).ready(function () {
         }, { className: "hide_column", "targets": [1] },
         { className: "hide_column", "targets": [7] },
         { className: "text-center", "targets": [8] },
+        { className: "text-center", "targets": [9] },
         { className: "text-center", "targets": [2] }
 
         ],
@@ -74,6 +75,21 @@ $(document).ready(function () {
                 //$($(row).find("td")[2]).css("background-color", "blue");
                 //$($(row).find('td')[2]).addClass('bg-gradient-green')
                 $($(row).find('td')['2']).html(icono)
+            }
+
+            if (data[9] == 1) {
+                icono = '<i class="fas fa-phone text-success fa-2x text-center"></i>';
+                $($(row).find('td')[9]).html(icono)
+                //$($(row).find('td')[3]).css('background-color', '#77BCF5');
+            }
+            else if (data[9]==2){
+                icono = '<i class="fas fa-phone-slash text-danger fa-2x text-center"></i>';
+                $($(row).find('td')[9]).html(icono)
+                //$($(row).find('td')[3]).css('background-color', '#A6EBC5');
+            } else{
+                icono = '<i class="fas fa-phone-alt text-secondary fa-2x text-center"></i>';
+                $($(row).find('td')[9]).html(icono)
+
             }
         },
 

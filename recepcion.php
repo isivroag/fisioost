@@ -12,7 +12,7 @@ include_once 'bd/conexion.php';
 $objeto = new conn();
 $conexion = $objeto->connect();
 $hoy = date('Y-m-d');
-$consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,time(start) as hora,nombre,color,estado FROM vcitap2 WHERE date(start)='$hoy' ORDER BY start";
+$consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,time(start) as hora,nombre,color,estado,confirmar FROM vcitap2 WHERE date(start)='$hoy' and estado<>4 ORDER BY start";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -67,6 +67,7 @@ $message = "";
                                             <th>Responsable</th>
                                             <th>Color</th>
                                             <th>Estado</th>
+                                            <th>Confirmación</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -85,6 +86,7 @@ $message = "";
                                                 <td><?php echo $dat['nombre']?></td>
                                                 <td><?php echo $dat['color']?></td>
                                                 <td><?php echo $dat['estado']?></td>
+                                                <td><?php echo $dat['confirmar']?></td>
                                                 <td></td>
                                             </tr>
                                         <?php

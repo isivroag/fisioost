@@ -88,10 +88,10 @@
 
 
 
-        <li class="nav-item has-treeview <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos' || $pagina == 'diario') ? "menu-open" : ""; ?>">
+        <li class="nav-item has-treeview <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos' || $pagina == 'diario' || $pagina == 'confirmar') ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos' || $pagina == 'diario') ? "active" : ""; ?>">
+          <a href="#" class="nav-link <?php echo ($pagina == 'cntavisitas' || $pagina == 'cntadiario' || $pagina == 'calendario' || $pagina == 'recepcion' || $pagina == 'ingresos' || $pagina == 'diario' || $pagina == 'confirmar') ? "active" : ""; ?>">
             <span class="fa-stack">
               <i class="fas fa-laptop-medical nav-icon"></i>
 
@@ -107,6 +107,12 @@
               <a href="calendario.php" class="nav-link <?php echo ($pagina == 'calendario') ? "active seleccionado" : ""; ?>  ">
                 <i class="fas fa-calendar-alt nav-icon"></i>
                 <p>Agenda</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="confirmacion.php" class="nav-link <?php echo ($pagina == 'confirmar') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-phone nav-icon"></i>
+                <p>Confirmación</p>
               </a>
             </li>
 
