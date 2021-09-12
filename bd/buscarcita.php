@@ -10,6 +10,9 @@
  
  $id = (isset($_POST['id'])) ? $_POST['id'] : '';
  $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
+ $motivo = (isset($_POST['motivo'])) ? $_POST['motivo'] : '';
+$usuario = (isset($_POST['usuario'])) ? $_POST['usuario'] : '';
+$fecha = (isset($_POST['fecha'])) ? $_POST['fecha'] : '';
  date_default_timezone_set('America/Mexico_City');
  $ahora=date("Y-m-d H:i:s");
  $data=0;
@@ -63,7 +66,7 @@
             if ($resultado->execute()){
                 $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
                 
-                $consulta = "UPDATE citap set estado=4,confirmar=3 where folio_citap='$id'";
+                $consulta = "UPDATE citap set estado=4,confirmar=3,fecha_can='$fecha',motivo_can='$motivo',usuario_can='$usuario' where folio_citap='$id'";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
 

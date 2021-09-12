@@ -211,32 +211,78 @@ $(document).ready(function () {
         fila = $(this);
         opcion=4;
         id = parseInt($(this).closest("tr").find('td:eq(0)').text());
-        $.ajax({
-
-            url: "bd/buscarcita.php",
-            type: "POST",
-            dataType: "json",
-            async: "false",
-            data: { id: id, opcion: opcion },
-
-            success: function (data) {
-                Swal.fire({
-                    title: "Paciente Canceló la cita",
-                    text: "Cita Cancelada",
-                    icon: "warning",
-                    timer:1000,
-                });
-                
-               buscar();
-                //window.setTimeout(function() {
-                //    window.location.href = "confirmacion.php";
-                //}, 1500);
-            }
-        });
+        $("#formcan").trigger("reset");
+        /*$(".modal-header").css("background-color", "#28a745");*/
+        $(".modal-header").css("color", "white");
+        $("#modalcan").modal("show");
+        $("#foliocan").val(id);
     });
    
 
-  
+    $(document).on("click", "#btnGuardarc", function() {
+        motivo = $("#motivo").val();
+        id = $("#foliocan").val();
+        fecha = $("#fechac").val();
+        usuario = $("#nameuser").val();
+        $("#modalcan").modal("hide");
+        opcion=4;
+        console.log(id);
+        console.log(motivo);
+        console.log(fecha);
+        console.log(usuario);
+
+        if (motivo === "") {
+            swal.fire({
+                title: "Datos Incompletos",
+                text: "Verifique sus datos",
+                icon: "warning",
+                focusConfirm: true,
+                confirmButtonText: "Aceptar",
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "bd/buscarcita.php",
+                async: false,
+                dataType: "json",
+                data: {
+                    id: id, opcion: opcion,
+                    motivo: motivo,
+                    fecha: fecha,
+                    usuario: usuario,
+                },
+                success: function(data) {
+                    if (data[0].id == id) {
+                        mensaje();
+                        window.setTimeout(function() {
+                           buscar();
+                        }, 1500);
+                    } else {
+                        mensajeerror();
+                    }
+                },
+            });
+        }
+    });
+
+    function mensaje() {
+        swal.fire({
+            title: "Registro Cancelado",
+            icon: "success",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+            timer: 2000
+        });
+    }
+
+    function mensajeerror() {
+        swal.fire({
+            title: "Error al Cancelar el Registro",
+            icon: "error",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+        });
+    }
 
 
 

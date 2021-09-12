@@ -21,7 +21,7 @@ $obs = ucfirst(strtolower($obs));
 
 switch ($opcion) {
         case 1: //alta
-                $consulta = "SELECT * FROM citap where (id_per='$responsable' and fecha='$fecha') and estado<> 3 and estado <> 4";
+                $consulta = "SELECT * FROM citap where (id_per='$responsable' and fecha='$fecha') and estado<> 3 and estado <> 4 " ;
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
                 if ($resultado->rowCount()==0){

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 
     $.ajaxSetup({
@@ -6,13 +6,13 @@ $(document).ready(function() {
     });
 
     jQuery.ajaxSetup({
-        beforeSend: function() {
+        beforeSend: function () {
             $("#div_carga").show();
         },
-        complete: function() {
+        complete: function () {
             $("#div_carga").hide();
         },
-        success: function() {},
+        success: function () { },
     });
 
     $.ajax({
@@ -20,10 +20,10 @@ $(document).ready(function() {
         type: 'POST',
         async: false,
 
-        success: function(data) {
+        success: function (data) {
             obj = JSON.stringify(data);
         },
-        error: function(xhr, err) {
+        error: function (xhr, err) {
             alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
             alert("responseText: " + xhr.responseText);
         }
@@ -87,7 +87,7 @@ $(document).ready(function() {
                 });
             },*/
 
-            eventClick: function(calEvent) {
+            eventClick: function (calEvent) {
                 var id = calEvent.event.id;
                 opcion = 2;
 
@@ -96,15 +96,36 @@ $(document).ready(function() {
                     type: "POST",
                     dataType: "json",
                     data: { id: id, opcion: 3 },
-                    success: function(data) {
-                        $("#folio").val(data[0].id);
-                        $("#id_pros").val(data[0].id_pros);
-                        $("#nom_pros").val(data[0].title);
-                        $("#concepto").val(data[0].descripcion);
-                        $("#fecha").val(data[0].start);
-                        $("#obs").val(data[0].obs);
+                    success: function (data) {
+                        if (data[0].tipo_p == 0) {
+                            $("#formDatos :input").prop("disabled", true);
+                            $("#folio").val(data[0].id);
+                            $("#id_pros").val(data[0].id_pros);
+                            $("#nom_pros").val(data[0].title);
+                            $("#concepto").val(data[0].descripcion);
+                            $("#responsable").val(data[0].id_per);
+                            $("#fecha").val(data[0].start);
+                            $("#obs").val(data[0].obs);
+                            $('#btnCancelarcta').show();
+                            $('#btnGuardar').hide();
 
-                        $("#modalCRUD").modal("show");
+                            $("#btnCancelarcta").prop("disabled", false);
+                            $("#modalCRUD").modal("show");
+                        } else {
+                            $("#formDatospx :input").prop("disabled", true);
+                            $("#foliox").val(data[0].id);
+                            $("#id_prosx").val(data[0].id_pros);
+                            $("#nom_prosx").val(data[0].title);
+                            $("#conceptox").val(data[0].descripcion);
+                            $("#responsablex").val(data[0].id_per);
+                            $("#fechax").val(data[0].start);
+                            $("#obsx").val(data[0].obs);
+                            $('#btnCancelarctax').show();
+                            $('#btnGuardarx').hide();
+                            
+                            $("#btnCancelarctax").prop("disabled", false);
+                            $("#modalpx").modal("show");
+                        }
                     },
                 });
             },
@@ -177,43 +198,51 @@ $(document).ready(function() {
 
 
 
-    $(document).on("click", "#bcliente", function() {
+    $(document).on("click", "#bcliente", function () {
 
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
 
         $("#modalProspecto").modal("show");
 
+
     });
-    $(document).on("click", "#bclientex", function() {
+    $(document).on("click", "#bclientex", function () {
 
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
 
         $("#modalProspectox").modal("show");
+        $('#btnCancelarctax').hide();
 
     });
 
 
-    $(document).on("click", "#btnNuevo", function() {
-
+    $(document).on("click", "#btnNuevo", function () {
+        $("#formDatos").trigger("reset");
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
         opcion = 1;
+        $("#formDatos :input").prop("disabled", false);
+        $('#btnCancelarcta').hide();
+        $('#btnGuardar').show();
         $("#modalCRUD").modal("show");
 
     });
 
-    $(document).on("click", "#btnNuevox", function() {
-
+    $(document).on("click", "#btnNuevox", function () {
+        $("#formDatosx").trigger("reset");
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
         opcion = 1;
+        $("#formDatosx :input").prop("disabled", false);
+        $('#btnCancelarctax').hide();
+        $('#btnGuardarx').show();
         $("#modalpx").modal("show");
 
     });
 
-    $(document).on("click", ".btnSelCliente", function() {
+    $(document).on("click", ".btnSelCliente", function () {
         fila = $(this).closest("tr");
 
         IdCliente = fila.find('td:eq(0)').text();
@@ -227,7 +256,7 @@ $(document).ready(function() {
     });
 
 
-    $(document).on("click", ".btnSelClientex", function() {
+    $(document).on("click", ".btnSelClientex", function () {
         fila = $(this).closest("tr");
 
         IdClientex = fila.find('td:eq(0)').text();
@@ -241,7 +270,7 @@ $(document).ready(function() {
     });
 
 
-    $(document).on("click", "#btnGuardar", function() {
+    $(document).on("click", "#btnGuardar", function () {
 
         var id_pros = $.trim($("#id_pros").val());
         var nombre = $.trim($("#nom_pros").val());
@@ -251,42 +280,42 @@ $(document).ready(function() {
         var id = $.trim($("#folio").val());
         var tipop = $.trim($("#tipop").val());
         var responsable = $.trim($("#responsable").val());
-        console.log(tipop);
+        console.log(responsable);
 
 
         $.ajax({
             url: "bd/citasp.php",
             type: "POST",
             dataType: "json",
-            async:"false",
-            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion, responsable: responsable },
-            success: function(data) {
-                if (data==1){
+            async: "false",
+            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs, tipop: tipop, concepto: concepto, id: id, opcion: opcion, responsable: responsable },
+            success: function (data) {
+                if (data == 1) {
                     console.log(data);
                     Swal.fire({
                         title: "Operación Exitosa",
                         text: "Cita Guardada",
                         icon: "success",
-                        timer:1000,
+                        timer: 1000,
                     });
-                    window.setTimeout(function() {
+                    window.setTimeout(function () {
                         location.reload();
                     }, 1500);
-                   
-                }else{
+
+                } else {
                     Swal.fire({
                         title: 'No es posible Agendar la Cita',
                         icon: 'warning',
                     })
                 }
-               
+
 
             }
         });
         $("#modalCRUD").modal("hide");
     });
 
-    $(document).on("click", "#btnGuardarx", function() {
+    $(document).on("click", "#btnGuardarx", function () {
 
         var id_pros = $.trim($("#id_prosx").val());
         var nombre = $.trim($("#nom_prosx").val());
@@ -297,27 +326,27 @@ $(document).ready(function() {
         var tipop = $.trim($("#tipopx").val());
         var responsable = $.trim($("#responsablex").val());
 
-
+        console.log(responsable);
 
         $.ajax({
             url: "bd/citasp.php",
             type: "POST",
             dataType: "json",
-            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs,tipop: tipop, concepto: concepto, id: id, opcion: opcion,responsable: responsable },
-            success: function(data) {
-                if (data==1){
+            data: { nombre: nombre, id_pros: id_pros, fecha: fecha, obs: obs, tipop: tipop, concepto: concepto, id: id, opcion: opcion, responsable: responsable },
+            success: function (data) {
+                if (data == 1) {
                     console.log(data);
                     Swal.fire({
                         title: "Operación Exitosa",
                         text: "Cita Guardada",
                         icon: "success",
-                        timer:1000,
+                        timer: 1000,
                     });
-                    window.setTimeout(function() {
+                    window.setTimeout(function () {
                         location.reload();
                     }, 1500);
-                   
-                }else{
+
+                } else {
                     Swal.fire({
                         title: 'No es posible Agendar la Cita',
                         icon: 'warning',
@@ -329,6 +358,109 @@ $(document).ready(function() {
     });
 
 
+
+    $(document).on("click", "#btnCancelarcta", function() {
+   
+
+
+        folio =  $("#folio").val();
+
+      
+
+      
+            $("#formcan").trigger("reset");
+            /*$(".modal-header").css("background-color", "#28a745");*/
+            $(".modal-header").css("color", "white");
+            $("#modalcan").modal("show");
+            $("#foliocan").val(folio);
+       
+
+
+    });
+
+    $(document).on("click", "#btnCancelarctax", function() {
+       
+
+
+        folio =  $("#foliox").val();
+
+      
+
+      
+            $("#formcan").trigger("reset");
+            /*$(".modal-header").css("background-color", "#28a745");*/
+            $(".modal-header").css("color", "white");
+            $("#modalcan").modal("show");
+            $("#foliocan").val(folio);
+       
+
+
+    });
+
+    $(document).on("click", "#btnGuardarc", function() {
+        motivo = $("#motivo").val();
+        id = $("#foliocan").val();
+        fecha = $("#fechac").val();
+        usuario = $("#nameuser").val();
+        $("#modalcan").modal("hide");
+        opcion=4;
+        console.log(id);
+        console.log(motivo);
+        console.log(fecha);
+        console.log(usuario);
+
+        if (motivo === "") {
+            swal.fire({
+                title: "Datos Incompletos",
+                text: "Verifique sus datos",
+                icon: "warning",
+                focusConfirm: true,
+                confirmButtonText: "Aceptar",
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "bd/buscarcita.php",
+                async: false,
+                dataType: "json",
+                data: {
+                    id: id, opcion: opcion,
+                    motivo: motivo,
+                    fecha: fecha,
+                    usuario: usuario,
+                },
+                success: function(data) {
+                    if (data[0].id == id) {
+                        mensaje();
+                        window.setTimeout(function() {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        mensajeerror();
+                    }
+                },
+            });
+        }
+    });
+
+    function mensaje() {
+        swal.fire({
+            title: "Registro Cancelado",
+            icon: "success",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+            timer: 2000
+        });
+    }
+
+    function mensajeerror() {
+        swal.fire({
+            title: "Error al Cancelar el Registro",
+            icon: "error",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+        });
+    }
 
 
 });

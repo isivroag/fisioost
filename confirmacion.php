@@ -16,7 +16,7 @@ $consulta = "SELECT id,id_pros,tipo_p,title,descripcion,date(start) as fecha,tim
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
+$fecha = date('Y-m-d');
 $message = "";
 
 
@@ -46,18 +46,18 @@ $message = "";
 
                 <div class="card">
                     <div class="card-header bg-gradient-green">
-                       Fecha
+                        Fecha
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col-lg-2">
                                 <div class="form-group input-group-sm">
                                     <label for="fechad" class="col-form-label">Fecha de Consulta:</label>
-                                    <input type="date" class="form-control" name="fechad" id="fechad" value="<?php echo $hoy?>">
+                                    <input type="date" class="form-control" name="fechad" id="fechad" value="<?php echo $hoy ?>">
                                 </div>
                             </div>
 
-                           
+
 
                             <div class="col-lg-1 align-self-end text-center">
                                 <div class="form-group input-group-sm">
@@ -67,7 +67,7 @@ $message = "";
                         </div>
                     </div>
                 </div>
-<!-- 
+                <!-- 
                 <div class="row">
                     <div class="col-lg-12">
                         <button id="btnNuevo" type="button" class="btn bg-gradient-green btn-ms" data-toggle="modal"><i class="fas fa-plus-square text-light"></i><span class="text-light"> Nuevo</span></button>
@@ -133,7 +133,46 @@ $message = "";
 
     </section>
 
-
+    <section>
+        <div class="modal fade" id="modalcan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-gradient-danger">
+                        <h5 class="modal-title" id="exampleModalLabel">CANCELAR REGISTRO</h5>
+                    </div>
+                    <div class="card card-widget" style="margin: 10px;">
+                        <form id="formcan" action="" method="POST">
+                            <div class="modal-body row">
+                                <div class="col-sm-12">
+                                    <div class="form-group input-group-sm">
+                                        <label for="motivo" class="col-form-label">Motivo de Cancelacioón:</label>
+                                        <textarea rows="3" class="form-control" name="motivo" id="motivo" placeholder="Motivo de Cancelación"></textarea>
+                                        <input type="hidden" id="fechac" name="fechac" value="<?php echo $fecha ?>">
+                                        <input type="hidden" id="foliocan" name="foliocan" value="">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <?php
+                    if ($message != "") {
+                    ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <span class="badge "><?php echo ($message); ?></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
+                        <button type="button" id="btnGuardarc" name="btnGuardarc" class="btn btn-success" value="btnGuardarc"><i class="far fa-save"></i> Guardar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- /.content -->
 </div>
