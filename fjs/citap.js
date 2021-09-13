@@ -231,11 +231,11 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#btnNuevox", function () {
-        $("#formDatosx").trigger("reset");
+        $("#formDatospx").trigger("reset");
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
         opcion = 1;
-        $("#formDatosx :input").prop("disabled", false);
+        $("#formDatospx :input").prop("disabled", false);
         $('#btnCancelarctax').hide();
         $('#btnGuardarx').show();
         $("#modalpx").modal("show");
