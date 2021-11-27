@@ -159,6 +159,7 @@
         </li>
 
         <!-- ADMINISTRACION-->
+        <?php if ($_SESSION['s_rol'] == '2') { ?>
         <li class="nav-item has-treeview <?php echo ($pagina == 'cuentasing'  || $pagina == 'cntamovb') ? "menu-open" : ""; ?>">
 
 
@@ -193,7 +194,7 @@
 
           </ul>
         </li>
-
+        <?php } ?>
 
 
 
