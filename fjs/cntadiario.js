@@ -54,7 +54,17 @@ $(document).ready(function () {
 
     });
 
-    tablaResumen = $("#tablaResumen").DataTable({
+    tablaResumen = $("#tablaResumen").DataTable(
+        
+        
+        {
+
+        "columnDefs": [{
+            "targets": -1,
+            "data": null,
+            "defaultContent": "<div class='text-center'>\
+            <button class='btn btn-sm btn-danger btnCancelarPago'><i class='fas fa-ban'></i></button></div>"
+        },],
         //Para cambiar el lenguaje a español
         language: {
             lengthMenu: "Mostrar _MENU_ registros",
@@ -89,13 +99,15 @@ $(document).ready(function () {
         total = total.replace(",", "");
         console.log(total);
         total = parseFloat(total);
+        tipo=1;
 
         if (total == saldo) {
             $("#formcan").trigger("reset");
-            /*$(".modal-header").css("background-color", "#28a745");*/
             $(".modal-header").css("color", "white");
             $("#modalcan").modal("show");
             $("#foliocan").val(folio);
+            $("#tipocan").val(tipo);
+
         } else {
             swal.fire({
                 title: "¡No es posible cancelar la venta!",
@@ -109,11 +121,30 @@ $(document).ready(function () {
 
     });
 
+    $(document).on("click", ".btnCancelarPago", function() {
+        fila = $(this).closest("tr");
+
+
+        folio = parseInt(fila.find("td:eq(0)").text());
+        tipo=2;
+
+     
+            $("#formcan").trigger("reset");
+            $(".modal-header").css("color", "white");
+            $("#modalcan").modal("show");
+            $("#foliocan").val(folio);
+            $("#tipocan").val(tipo);
+
+
+
+    });
+
     $(document).on("click", "#btnGuardarc", function() {
         motivo = $("#motivo").val();
         folio = $("#foliocan").val();
         fecha = $("#fechac").val();
         usuario = $("#nameuser").val();
+        tipo= $("#tipocan").val();
         $("#modalcan").modal("hide");
        
 
@@ -135,6 +166,7 @@ $(document).ready(function () {
                 data: {
                     folio: folio,
                     motivo: motivo,
+                    tipo: tipo,
                     fecha: fecha,
                     usuario: usuario,
                 },

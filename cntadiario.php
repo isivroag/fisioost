@@ -13,9 +13,9 @@ $objeto = new conn();
 $fecha = date('Y-m-d');
 $conexion = $objeto->connect();
 if ($_SESSION['s_rol'] == '2') {
-  $consulta = "SELECT * FROM v_registro WHERE estado_reg = 1 ORDER BY folio_reg";
+  $consulta = "SELECT * FROM v_registro WHERE estado_reg = 1 AND fecha_reg='$fecha' ORDER BY folio_reg";
 }else{
-  $consulta = "SELECT * FROM v_registro WHERE estado_reg = 1 and saldo_reg>0 ORDER BY folio_reg";
+  $consulta = "SELECT * FROM v_registro WHERE estado_reg = 1 and saldo_reg>0 and fecha_Reg='$fecha' ORDER BY folio_reg";
 }
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
@@ -59,7 +59,7 @@ $message = "";
               <div class="col-lg-2">
                 <div class="form-group input-group-sm">
                   <label for="fecha" class="col-form-label">Desde:</label>
-                  <input type="date" class="form-control" name="inicio" id="inicio">
+                  <input type="date" class="form-control" name="inicio" id="inicio" value="<?php echo $fecha ?>">
                   <input type="hidden" class="form-control" name="tipo_proy" id="tipo_proy" value=1>
 
                 </div>
@@ -68,7 +68,7 @@ $message = "";
               <div class="col-lg-2">
                 <div class="form-group input-group-sm">
                   <label for="fecha" class="col-form-label">Hasta:</label>
-                  <input type="date" class="form-control" name="final" id="final">
+                  <input type="date" class="form-control" name="final" id="final" value="<?php echo $fecha ?>">
                 </div>
               </div>
 
@@ -281,6 +281,7 @@ $message = "";
                     <th>Concepto</th>
                     <th>Monto</th>
                     <th>Metodo</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -319,6 +320,7 @@ $message = "";
                     <textarea rows="3" class="form-control" name="motivo" id="motivo" placeholder="Motivo de Cancelación"></textarea>
                     <input type="hidden" id="fechac" name="fechac" value="<?php echo $fecha ?>">
                     <input type="hidden" id="foliocan" name="foliocan" value="">
+                    <input type="hidden" id="tipocan" name="tipocan" value="">
                   </div>
                 </div>
               </div>

@@ -68,14 +68,14 @@
                 <p>Pacientes</p>
               </a>
             </li>
-            <?php if ($_SESSION['s_rol'] == '2') {?>
-            <li class="nav-item">
-              <a href="cntaconcepto.php" class="nav-link <?php echo ($pagina == 'concepto') ? "active seleccionado" : ""; ?>  ">
-                <i class="fas fa-layer-group nav-icon"></i>
-                <p>Conceptos</p>
-              </a>
-            </li>
-            <?php }?>
+            <?php if ($_SESSION['s_rol'] == '2') { ?>
+              <li class="nav-item">
+                <a href="cntaconcepto.php" class="nav-link <?php echo ($pagina == 'concepto') ? "active seleccionado" : ""; ?>  ">
+                  <i class="fas fa-layer-group nav-icon"></i>
+                  <p>Conceptos</p>
+                </a>
+              </li>
+            <?php } ?>
 
 
 
@@ -129,7 +129,7 @@
                 <p>Registro de Ingresos</p>
               </a>
             </li>
-<!--
+            <!--
             <li class="nav-item">
               <a href="cntavisitas.php" class=" nav-link <?php echo ($pagina == 'cntavisitas') ? "active seleccionado" : ""; ?> ">
                 <i class=" fas fa-file-invoice nav-icon"></i>
@@ -144,16 +144,52 @@
               </a>
             </li>
 
-            <?php if ($_SESSION['s_rol'] == '2') {?>
+            <?php if ($_SESSION['s_rol'] == '2') { ?>
+              <li class="nav-item">
+                <a href="cntaingresos.php" class=" nav-link <?php echo ($pagina == 'ingresos') ? "active seleccionado" : ""; ?> ">
+                  <i class=" fas fa-file-invoice nav-icon"></i>
+                  <p>Reporte de Ingresos</p>
+                </a>
+              </li>
+
+
+            <?php } ?>
+
+          </ul>
+        </li>
+
+        <!-- ADMINISTRACION-->
+        <li class="nav-item has-treeview <?php echo ($pagina == 'cuentasing'  || $pagina == 'cntamovb') ? "menu-open" : ""; ?>">
+
+
+          <a href="#" class="nav-link <?php echo ($pagina == 'cuentasing' || $pagina == 'cntamovb') ? "active" : ""; ?>">
+            <span class="fa-stack">
+              <i class=" fas fa-book "></i>
+
+            </span>
+            <p>
+              Administración
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="cntaingresos.php" class=" nav-link <?php echo ($pagina == 'ingresos') ? "active seleccionado" : ""; ?> ">
-                <i class=" fas fa-file-invoice nav-icon"></i>
-                <p>Reporte de Ingresos</p>
+              <a href="cntacuentasing.php" class="nav-link <?php echo ($pagina == 'cuentasing') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-university nav-icon"></i>
+                <p>Cuentas de Ingreso</p>
               </a>
             </li>
-           
 
-            <?php }?>
+            <li class="nav-item">
+              <a href="cntamovb.php" class="nav-link <?php echo ($pagina == 'cntamovb') ? "active seleccionado" : ""; ?>  ">
+                <i class="fas fa-search-plus nav-icon"></i>
+                <p>Consulta de Movimientos</p>
+              </a>
+            </li>
+
+
+
+
 
           </ul>
         </li>
@@ -161,8 +197,7 @@
 
 
 
-
-        <?php if ($_SESSION['s_rol'] == '2') {?>
+        <?php if ($_SESSION['s_rol'] == '2') { ?>
           <hr class="sidebar-divider">
           <li class="nav-item">
             <a href="cntausuarios.php" class="nav-link <?php echo ($pagina == 'usuarios') ? "active" : ""; ?> ">
@@ -170,7 +205,7 @@
               <p>Usuarios</p>
             </a>
           </li>
-        <?php }?>
+        <?php } ?>
 
         <hr class="sidebar-divider">
         <li class="nav-item">

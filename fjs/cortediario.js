@@ -177,8 +177,10 @@ $(document).ready(function () {
         return val;
     }
 
-    
-   function buscardiaio() {
+    $('#btnBuscar').click(function () {
+      buscardiario()
+    })
+   function buscardiario() {
       var inicio = $('#inicio').val()
       var final = $('#final').val()
     
@@ -194,8 +196,20 @@ $(document).ready(function () {
           dataType: 'json',
           data: { inicio: inicio, final: final },
           success: function (data) {
+            efectivo=0;
+            otro=0;
+            metodo="";
             for (var i = 0; i < data.length; i++) {
-              
+
+              monto=parseFloat(data[i].monto)
+              metodo=data[i].metodo;
+              console.log(metodo)
+              console.log(monto)
+              if (metodo=='Efectivo'){
+                efectivo+=monto;
+              }else{
+                otro+=monto;
+              }
               tablaVis.row
                 .add([
                   data[i].folio_pago,
@@ -212,6 +226,9 @@ $(document).ready(function () {
   
               //tabla += '<tr><td>' + res[i].id_objetivo + '</td><td>' + res[i].desc_objetivo + '</td><td class="text-center">' + icono + '</td><td class="text-center"></td></tr>';
             }
+            $('#efectivo').val(efectivo);
+            $('#otros').val(otro);
+            $('#total').val(efectivo+otro);
           },
         })
       } else {
