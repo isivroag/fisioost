@@ -2,6 +2,24 @@ $(document).ready(function () {
     var id_concepto, opcion;
     opcion = 4;
 
+    var textcolumnas = permisos()
+
+    function permisos() {
+      var tipousuario = $('#tipousuario').val()
+      var columnas = ''
+     
+      if (tipousuario == 1) {
+        columnas =
+         ""
+      } else {
+        columnas =
+        "<div class='text-center'>\
+        <button class='btn btn-sm btn-danger btnCancelarPago'><i class='fas fa-ban'></i></button></div>"
+      }
+      return columnas
+    }
+  
+
     tablaVis = $("#tablaV").DataTable({
         keys: true,
         stateSave: true,
@@ -59,12 +77,17 @@ $(document).ready(function () {
         
         {
 
-        "columnDefs": [{
+
+                    "columnDefs": [
+            {
             "targets": -1,
             "data": null,
-            "defaultContent": "<div class='text-center'>\
-            <button class='btn btn-sm btn-danger btnCancelarPago'><i class='fas fa-ban'></i></button></div>"
-        },],
+            "defaultContent": textcolumnas
+        }
+        ],
+    
+        
+
         //Para cambiar el lenguaje a español
         language: {
             lengthMenu: "Mostrar _MENU_ registros",

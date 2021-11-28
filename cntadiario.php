@@ -280,8 +280,9 @@ $message = "";
                     <th>Fecha</th>
                     <th>Concepto</th>
                     <th>Monto</th>
-                    <th>Metodo</th>
+                    <th>Metodo</th>                   
                     <th>Acciones</th>
+
                   </tr>
                 </thead>
                 <tbody>
